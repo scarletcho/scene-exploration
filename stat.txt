@@ -1,0 +1,3 @@
+Total # of documents: 883
+Total # of sentences: 286949
+Total # of tokens: 4129199
