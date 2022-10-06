@@ -24,15 +24,16 @@ def collect_sample(sent, query, query_pos):
 with open("queries.txt", "r") as f:
     nouns = f.read().splitlines()
 
-
-verbose = False
+verbose = True
 query_pos = ["NOUN", "PROPN"]  # added PROPN for examples like Christmas
-dict_path = "pkl/coca-fiction-dict.pkl"
+# dict_path = "pkl/coca-fiction-dict.pkl"
+dict_path = "pkl/diner-dict.pkl"
 
 for query in nouns:
     coca_dict = defaultdict(list)
     print('Query:', query)
-    with open("pkl/coca-fiction-stanza.pkl", "rb") as fr:
+    # with open("pkl/coca-fiction-stanza.pkl", "rb") as fr:
+    with open("pkl/diner.pkl", "rb") as fr:
         try:
             while True:
                 doc = pkl.load(fr)
