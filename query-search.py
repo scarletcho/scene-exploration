@@ -16,7 +16,7 @@ def collect_sample(sent, query, query_pos):
     except IndexError:
         return None
 
-    if word_pos == query_pos:
+    if word_pos in query_pos:
         return sent.text
     else:
         return None
@@ -26,7 +26,7 @@ with open("queries.txt", "r") as f:
 
 
 verbose = False
-query_pos = "NOUN"
+query_pos = ["NOUN", "PROPN"]  # added PROPN for examples like Christmas
 dict_path = "pkl/coca-fiction-dict.pkl"
 
 for query in nouns:
