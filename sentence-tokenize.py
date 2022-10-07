@@ -10,12 +10,9 @@ def save_objects(objects, path):
 nlp = stanza.Pipeline(lang='en', processors='tokenize,mwt,pos,lemma', logging_level='DEBUG')
 fiction_list = [_ for _ in os.listdir("fiction_refined") if _.endswith(".txt")]
 
-# path = 'pkl/coca-fiction-stanza.pkl'
-path = 'pkl/diner.pkl'
+path = 'pkl/coca-fiction-stanza.pkl'
 
 for fiction in tqdm(fiction_list):
-    # with open("fiction_refined/" + fiction, "r") as f:
-    #     documents = f.readlines()
     with open("fiction_refined/" + fiction, "r") as f:
         documents = f.readlines()
 

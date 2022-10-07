@@ -26,19 +26,22 @@ with open("queries.txt", "r") as f:
 
 verbose = True
 query_pos = ["NOUN", "PROPN"]  # added PROPN for examples like Christmas
-# dict_path = "pkl/coca-fiction-dict.pkl"
-dict_path = "pkl/diner-dict.pkl"
+dict_path = "pkl/coca-fiction-dict.pkl"
 
 for query in nouns:
     coca_dict = defaultdict(list)
     print('Query:', query)
-    # with open("pkl/coca-fiction-stanza.pkl", "rb") as fr:
-    with open("pkl/diner.pkl", "rb") as fr:
+    with open("pkl/coca-fiction-stanza.pkl", "rb") as fr:
         try:
             while True:
                 doc = pkl.load(fr)
                 for i_sent, sent in enumerate(tqdm(doc.sentences, leave=False)):
                     sample = collect_sample(sent, query, query_pos)
+                    try:
+                        if sent.text.index('diner'):
+                            print(sent.text)
+                    except ValueError:
+                        continue
                     if sample:
                         if verbose:
                             print(sent.text)
@@ -71,3 +74,10 @@ for query in nouns:
     else:
         with open(dict_path, "wb") as f:
             pkl.dump(coca_dict, f)
+
+
+with open("results/" + query + ".txt", "w") as f:
+    for doc in coca_dict[query]:
+        line = ' | '.join([doc.sent_before, doc.sent_curr, doc.sent_next])
+        f.writelines(line + '\n')
+
